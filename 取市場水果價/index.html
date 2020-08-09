@@ -1,0 +1,22 @@
+<table border="1">
+    <tr>
+        <th>作物名稱</th>
+        <th>均價</th>
+    </tr>
+    <tbody id="tr"></tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    axios.get('http://localhost:1234/getdata').then(function (result) {
+        console.log(result.data)
+        var items = result.data
+        var table = ""
+        for (let index = 0; index < items.length; index++) {
+            const element = items[index];
+            table += '<tr><td>' + element['作物名稱'] + '</td>' + '<td>' + element['平均價'] + '</td></tr>'
+        }
+        $('#tr').html(table)
+    })
+</script>
